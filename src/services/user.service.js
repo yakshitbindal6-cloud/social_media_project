@@ -14,7 +14,7 @@ export async function create_user(user_data){
     const user=await add_user(user_data);
     return user;
 }
-export async function update_user(user_id,update_data){
+export async function modify_user(user_id,update_data){
     const exist_user=await get_user_by_id(user_id);
     if(!exist_user)throw notFound("user not found");
     if(update_data.username && update_data.username!==exist_user.username){
