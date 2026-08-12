@@ -1,6 +1,6 @@
-import { Post} from "../schema/post";
-import { Comment } from "../schema/comment";
-import { Like } from "../schema/like";
+import { Post} from "../schema/post.js";
+import { Comment } from "../schema/comment.js";
+import { Like } from "../schema/like.js";
 
 export async function add_post(post_data){
     const post=await Post.create(post_data);
@@ -30,7 +30,7 @@ export async function deleteLikesByPostId(post_id, session=null){
     return await q.exec();
 }
 export async function List_posts(limit,offset){
-    const posts = (await Post.find().populate("user").skip(offset).limit(limit)).sort({ createdAt: -1 });
+    const posts = (await (await Post.find().populate("user")).sort({ createdAt: -1 }).skip(offset).limit(limit));
     const totalPosts = await Post.countDocuments();
     return {
         posts,

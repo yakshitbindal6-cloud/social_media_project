@@ -1,7 +1,7 @@
-import { User } from "../schema/user";
-import { Post } from "../schema/post";
-import { Like } from "../schema/like";
-import { Comment } from "../schema/comment";
+import { User } from "../schema/user.js";
+import { Post } from "../schema/post.js";
+import { Like } from "../schema/like.js";
+import { Comment } from "../schema/comment.js";
 export async function add_user(user_data){
     const user=await User.create(user_data);
     return user;

@@ -10,5 +10,5 @@ export class ApiError extends Error{
 export const badRequest = (message,details) => new ApiError(400, message, details);
 export const notFound = (message,details) => new ApiError(404, message,details);
 export const internalServerError=(message= "internal server error") => new ApiError(500, message);
-export const conflict=(message,details)=> new ApiError(409, message)
-export const forbidden=(message,details)=> new ApiError(409, message)
+export const conflict=(message,details)=> new ApiError(409, message,details)
+export const forbidden=(message,details)=> new ApiError(403, message,details)

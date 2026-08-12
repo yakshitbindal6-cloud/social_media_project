@@ -1,5 +1,5 @@
-import { create_post, modify_post, remove_post, get_post, ListPosts } from "../services/post.service";
-import { sendSuccess } from "../utils/api_response";
+import { create_post, modify_post, remove_post, get_post, ListPosts } from "../services/post.service.js";
+import { sendSuccess } from "../utils/api_response.js";
 
 export async function createPost(req, res) {
   const userId = req.params.userId;

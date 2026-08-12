@@ -1,6 +1,6 @@
-import { add_user,update_user,get_user_by_id, deleteLikesByUserId, deleteLikesByPostIds, deleteCommentsByIds, deleteLikesByCommentIds, deleteCommentsByUserId, deletePostsByUserId, remove_user } from "../repository/user.repository";
-import { badRequest,notFound } from "../utils/api_error";
-import { getUserbyUsername,getUserbyemail,getPostsByUser,getCommentsByPosts,getReplies_onComment} from "../repository/user.repository";
+import { add_user,update_user,get_user_by_id, deleteLikesByUserId, deleteLikesByPostIds, deleteCommentsByIds, deleteLikesByCommentIds, deleteCommentsByUserId, deletePostsByUserId, remove_user } from "../repository/user.repository.js";
+import { badRequest,notFound } from "../utils/api_error.js";
+import { getUserbyUsername,getUserbyemail,getPostsByUser,getCommentsByPosts,getReplies_onComment} from "../repository/user.repository.js";
 import  mongoose  from "mongoose";
 export async function create_user(user_data){
     const Userby_username=await getUserbyUsername(user_data.username);

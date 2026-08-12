@@ -1,4 +1,4 @@
-import { badRequest } from "../utils/api_error";
+import { badRequest } from "../utils/api_error.js";
 export const validate = (schema) => (req,res,next)=>{
     const result = schema.safeParse(req.body);
     if(!result.success){

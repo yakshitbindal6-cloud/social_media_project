@@ -1,6 +1,6 @@
-import { get_post_ByID ,deleteLikesByPostId, delete_post, add_post, update_post,List_posts } from "../repository/post.repository";
-import { deleteCommentsByIds, deleteLikesByCommentIds, getReplies_onComment } from "../repository/user.repository";
-import { badRequest,notFound,forbidden } from "../utils/api_error";
+import { get_post_ByID ,deleteLikesByPostId, delete_post, add_post, update_post,List_posts } from "../repository/post.repository.js";
+import { deleteCommentsByIds, deleteLikesByCommentIds, getReplies_onComment } from "../repository/user.repository.js";
+import { badRequest,notFound,forbidden } from "../utils/api_error.js";
 import  mongoose  from "mongoose";
 
 export async function create_post(post_id){

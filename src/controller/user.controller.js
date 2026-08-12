@@ -1,5 +1,5 @@
-import { get_user, delete_user, modify_user, create_user } from "../services/user.service";
-import { sendSuccess } from "../utils/api_response";
+import { get_user, delete_user, modify_user, create_user } from "../services/user.service.js";
+import { sendSuccess } from "../utils/api_response.js";
 
 export async function register_user(req, res) {
     const user = await create_user(req.body);

@@ -1,4 +1,4 @@
-import { ApiError} from "../utils/api_error";
+import { ApiError} from "../utils/api_error.js";
 export function error_hander(err,req,res,next){
     if(err instanceof ApiError){
         const body={
