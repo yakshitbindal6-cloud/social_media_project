@@ -84,3 +84,8 @@ export async function delete_user(user_id){
         session.endSession();
     }
 }
+export async function get_user(user_id){
+    const user=await get_user_by_id(user_id);
+    if(!user)throw notFound("user not found");
+    return user;
+}
