@@ -1,6 +1,6 @@
 import { create_comment ,get_comment,update_comment,delete_comment,delete_likes_onComment,remove_comment_from_post,add_comment_to_reply,remove_comment_from_reply} from "../repository/comment.repository.js";
 import { deleteLikesByCommentIds, get_user_by_id, getReplies_onComment,deleteCommentsByIds } from "../repository/user.repository.js";
-import { forbidden,notFound } from "../utils/api_error";
+import { forbidden,notFound } from "../utils/api_error.js";
 import { add_comment_to_post } from "../repository/post.repository.js";
 import mongoose from "mongoose";
 
