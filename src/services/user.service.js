@@ -31,7 +31,7 @@ export async function delete_user(user_id){
     const session = await mongoose.startSession();
     try {
         let result = null;
-        await session.withTransaction(async () => {
+        return await session.withTransaction(async () => {
             // ensure user exists within transaction
             const user = await get_user_by_id(user_id, session);
             if (!user) throw notFound("user not found");
@@ -77,9 +77,8 @@ export async function delete_user(user_id){
             // finally remove user
             await remove_user(user_id, session);
 
-            result = { message: "User and all associated data deleted successfully" };
-        });
-        return result;
+            return { message: "User and all associated data deleted successfully" };
+        })
     } finally {
         session.endSession();
     }

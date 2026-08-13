@@ -3,6 +3,7 @@ import { Comment } from "../schema/comment.js";
 import { Like } from "../schema/like.js";
 
 export async function add_post(post_data){
+    const user=await Post.findOne({user:post_data.user});
     const post=await Post.create(post_data);
     return post;
 }
@@ -41,4 +42,9 @@ export async function List_posts(limit,offset){
            totalPages: Math.ceil(totalPosts / limit),
         },
     }
+}
+export async function add_comment_to_post(post_id,comment_id,session=null){
+    const q= Post.findByIdAndUpdate(post_id,{$push:{comments:comment_id}},{new:true});
+    if(session)q.session(session);
+    return await q.exec();
 }

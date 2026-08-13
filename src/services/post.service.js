@@ -2,9 +2,12 @@ import { get_post_ByID ,deleteLikesByPostId, delete_post, add_post, update_post,
 import { deleteCommentsByIds, deleteLikesByCommentIds, getReplies_onComment } from "../repository/user.repository.js";
 import { badRequest,notFound,forbidden } from "../utils/api_error.js";
 import  mongoose  from "mongoose";
+import { get_user } from "./user.service.js";
 
-export async function create_post(post_id){
-    const post=await add_post(post_id);
+export async function create_post(post_data){
+    const user=await get_user(post_data.user);
+    if(!user)throw notFound("user not found");
+    const post=await add_post(post_data);
     return post;
 }
 export async function modify_post(user_id,post_id,post_data){
@@ -21,7 +24,7 @@ export async function modify_post(user_id,post_id,post_data){
 export async function remove_post(post_id){
     const session = await mongoose.startSession();
     try{
-        await session.withTransaction(async() =>{
+        return await session.withTransaction(async() =>{
             const post=await get_post_ByID(post_id,session);
             if(!post)throw notFound("post not found");
             let queue=post.comments.map(c=> c._id);
@@ -38,7 +41,7 @@ export async function remove_post(post_id){
             }
             await deleteCommentsByIds(allCommentIds,session);
             await delete_post(post_id);
-            
+            return {message:"Post and all associated data deleted successfully"};
         })
     }finally{
         await session.endSession();

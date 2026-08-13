@@ -9,6 +9,16 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: yaks2005
     volumes:
       - mongo_data:/data/db
+      - ./mongo/mongodb-keyfile:/etc/mongodb-keyfile:ro
+    command:
+      [
+        "mongod",
+        "--replSet",
+        "rs0",
+        "--bind_ip_all",
+        "--keyFile",
+        "/etc/mongodb-keyfile"
+      ]
 
 volumes:
   mongo_data:

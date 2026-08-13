@@ -1,7 +1,6 @@
 import { app } from "./app.js";
 import { PORT } from "./config/env.js";
 import { connectToDatabase} from "./config/database.js";
-
 async function startServer(){
     await connectToDatabase();
     app.listen(PORT,async ()=>{
