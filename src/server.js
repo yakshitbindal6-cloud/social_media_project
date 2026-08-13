@@ -11,3 +11,5 @@ startServer().catch((err)=>{
     console.log('Error starting the server:', err);
     process.exit(1);
 })
+
+// http://localhost:4000/api-docs

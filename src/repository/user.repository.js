@@ -74,7 +74,7 @@ export const deletePostsByUserId = async (userId, session = null) => {
 export const deleteLikesByPostIds = async (postIds, session = null) => {
     const q = Like.deleteMany({
         onmodel: "Post",
-        like_id: {
+        likeable_id: {
             $in: postIds
         }
     });
@@ -84,7 +84,7 @@ export const deleteLikesByPostIds = async (postIds, session = null) => {
 export async function deleteLikesByCommentIds(commentIds, session = null){
     const q = Like.deleteMany({
         onmodel: "Comment",
-        like_id: {
+        likeable_id: {
             $in: commentIds
         }
     });

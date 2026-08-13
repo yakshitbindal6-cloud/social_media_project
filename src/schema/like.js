@@ -5,7 +5,7 @@ const like_schema=new mongoose.Schema({
         required:true,
         enum:["Post","Comment"]
     },
-    like_id:{
+    likeable_id:{
         type:mongoose.Schema.Types.ObjectId,
         refPath:"onmodel",
         required:true

@@ -25,7 +25,7 @@ export async function delete_post(post_id, session=null){
 export async function deleteLikesByPostId(post_id, session=null){
     const q= Like.deleteMany({
         onmodel:"Post",
-        like_id:post_id
+        likeable_id:post_id
     })
     if(session)q.session(session);
     return await q.exec();

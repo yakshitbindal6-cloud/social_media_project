@@ -24,7 +24,7 @@ export async function delete_comment(comment_id, session=null){
 export async function delete_likes_onComment(comment_id,session=null){
     const q= Like.deleteMany({
         onmodel:'Comment',
-        like_id:comment_id
+        likeable_id:comment_id
     });
     if(session)q.session(session);
     return await q.exec();
