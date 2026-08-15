@@ -32,15 +32,10 @@ export async function delete_user(user_id){
     try {
         let result = null;
         return await session.withTransaction(async () => {
-            // ensure user exists within transaction
             const user = await get_user_by_id(user_id, session);
             if (!user) throw notFound("user not found");
-
-            // posts by user
             const posts = await getPostsByUser(user_id, session);
             const postIds = posts.map(p => p._id);
-
-            // gather all comments under those posts (BFS)
             let allCommentIds = [];
             let queue = [];
             if (postIds.length > 0) {
@@ -53,30 +48,17 @@ export async function delete_user(user_id){
                 const children = await getReplies_onComment(ids, session);
                 queue.push(...children.map(c => c._id));
             }
-
-            // delete likes authored by user
             await deleteLikesByUserId(user_id, session);
-
-            // delete likes on posts
             if (postIds.length > 0) {
                 await deleteLikesByPostIds(postIds, session);
             }
-
-            // delete likes on comments and comment documents
             if (allCommentIds.length > 0) {
                 await deleteLikesByCommentIds(allCommentIds, session);
                 await deleteCommentsByIds(allCommentIds, session);
             }
-
-            // delete comments authored by user
             await deleteCommentsByUserId(user_id, session);
-
-            // delete posts by user
             await deletePostsByUserId(user_id, session);
-
-            // finally remove user
             await remove_user(user_id, session);
-
             return { message: "User and all associated data deleted successfully" };
         })
     } finally {
