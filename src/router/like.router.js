@@ -38,7 +38,7 @@ const router = express.Router();
  *       201:
  *         description: Like added successfully
  */
-router.post("/:userId/:onmodel/:id", validateParam("userId"), validateParam("onmodel"), validateParam("id"), make_like);
+router.post("/:userId/:onmodel/:likeableId", validateParam("userId"), validateParam("likeableId"), make_like);
 
 /**
  * @swagger
@@ -61,6 +61,6 @@ router.post("/:userId/:onmodel/:id", validateParam("userId"), validateParam("onm
  *       200:
  *         description: Like deleted successfully
  */
-router.delete("/:userId/:id", validateParam("userId"), validateParam("id"), dislike);
+router.delete("/:userId/:likeId", validateParam("userId"), validateParam("likeId"), dislike);
 
 export default router;
